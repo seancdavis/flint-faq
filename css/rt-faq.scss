@@ -1,34 +1,52 @@
 $primary: #000000;
 $accent-1: #009b77;
 
+@mixin gradient( $bottom-color: $primary, $top-color: lighten($primary, 25%) ) {
+  background-color: $top-color;
+  background-image: -webkit-gradient(linear, left top, left bottom, from($top-color), to($bottom-color) );
+  background-image: -webkit-linear-gradient(top, $top-color, $bottom-color);
+  background-image: -moz-linear-gradient(top, $top-color, $bottom-color);
+  background-image: -ms-linear-gradient(top, $top-color, $bottom-color);
+  background-image: -o-linear-gradient(top, $top-color, $bottom-color);
+  background-image: linear-gradient(top, $top-color, $bottom-color);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top-color, endColorstr=$bottom-color, GradientType=0);
+}
+
 .faq-category {
 	margin: 40px 0 0 0;
 	clear: both;
 }
 
-.faq-question {
+.faq-preview {
   float: left;
   width: 21%;
   height: 150px;
   margin: 10px 1%;
   padding: 10px 1%;
   background: $accent-1;
-  color: lighten($primary, 100%);
-  font-weight: normal;
+  h2 {
+    color: lighten($primary, 100%);
+    font-weight: normal;
+  }
+  &:hover {
+	cursor: pointer;
+	}
 }
 
-.faq-question:hover {
-	cursor: pointer;
+.rt-faq {
+  overflow: scroll;
+  border: 1px solid $primary;
+  left: 0;
+  width: 44%;
+  padding: 20px 3%;
+  position: fixed;
+  top: 25%;
+  left: 100%;
+  @include gradient( $primary, darken($primary, 20%) );
+  color: lighten($primary, 75%);
+  z-index: 200;
 }
 
 .faq-answer {
-  display: none;
-  float: left;
-  width: 70%;
-  background: lighten($primary, 85%);
-  color: lighten($primary, 20%);
-  margin: 10px -1%;
-  padding: 10px 1%;
-  height: 150px;
-  overflow: scroll;
+  float: left; 
 }

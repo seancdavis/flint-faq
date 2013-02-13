@@ -1,5 +1,47 @@
 jQuery(document).ready(function($) {
+  
+  
+  
+  
+  $('.faq-preview').click(function(){
+    	var thisID = parseFloat( $(this).attr('id').substr(9, $(this).attr('id').length - 9) );
+    	$('.rt-faq').animate({
+    		left: '100%',
+    	}, 500);
+    	$('#rt-faq-' + thisID).animate({
+    		left: '50%',
+    	}, 500);
+    }); 
     
+    $(window).scroll(function(){
+    	setTimeout(function(){
+	    	$('.rt-faq').animate({
+	    		left: '100%',
+	    	}, 500);
+	    	
+	    	},250);
+    });
+  
+  
+/*   
+    $('.faq-preview').click(function(){
+    	var thisID = parseFloat( $(this).attr('id').substr(9, $(this).attr('id').length - 9) );
+    	$('.rt-faq').animate({
+    		left: '100%',
+    	}, 500);
+    	$('#rt-faq-' + thisID).animate({
+    		left: '50%',
+    	}, 500);
+    });
+    
+    $(window).scroll(function(){
+    	$('.rt-faq').animate({
+    		left: '100%',
+    	}, 500);
+    });
+*/
+    
+    /*
     var questionCount = 1;
 	$('.faq-question').each(function(){
 		$(this).attr('id','rt-faq-' + questionCount);
@@ -27,7 +69,7 @@ jQuery(document).ready(function($) {
 		*/
 		//$('.faq-question').css('clear','none');
 		//$(this).css('clear','both');
-	});
+	//});
 	//function() {
 		//$(this).css('clear','none');
 		//$(this).parent().children('.faq-answer').fadeOut();
