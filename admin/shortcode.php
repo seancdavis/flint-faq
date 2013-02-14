@@ -48,7 +48,7 @@ function the_faq_loop( $atts ) {
 					
 					$content .= '<div class="faq-preview" id="faq-prev-' . $faq_counter . '"><h2>' . get_the_title() . '</h2></div>';
 					
-					$content .= '<div class="rt-faq" id="rt-faq-' . $faq_counter . '"><h2>' . get_the_title() . '</h2><div class="faq-answer">' . $this_content . '</div></div>';
+					$content .= '<div class="rt-faq" id="rt-faq-' . $faq_counter . '"><a class="rt-faq-hide-me">Hide Me!</a><h2>' . get_the_title() . '</h2><div class="faq-answer">' . $this_content . '</div></div>';
 					
 					$faq_counter++;
 				}

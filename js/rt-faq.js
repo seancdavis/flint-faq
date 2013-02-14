@@ -1,26 +1,24 @@
 jQuery(document).ready(function($) {
-  
-  
-  function slideOut(ID) {
-	$('#rt-faq-' + ID).animate({
-		left: '50%',
-	}, 500);
-  }
-  
+	var thisID = ''; // used to know which FAQ div is showing
+	var faqsShowing = 0; // how many FAQ divs are showing?
+	var slideLength = 500; // controls the length of time for the div to slide out 
+	$('.faq-preview').on('click',clickEffect);
+	$('.rt-faq-hide-me').on('click', function(){slideIn( parseFloat( $(this).parent().attr('id').substr(7, $(this).parent().attr('id').length - 7) ) ) } );
+	
+	function slideOut(ID) {
+		$('#rt-faq-' + ID).animate({
+			left: '50%',
+		}, slideLength);
+	}
+	
 	function slideIn(ID) {
 		$('#rt-faq-' + ID).animate({
 			left: '100%',
-		}, 500);
-  	}
-  
-  var thisID = '';
-  var faqsShowing = 0;
-  
-  $('.faq-preview').on('click',clickEffect);
-  	
+		}, slideLength);
+  	}  
+  		
   	function clickEffect() {
     	var newID = parseFloat( $(this).attr('id').substr(9, $(this).attr('id').length - 9) );
-    	
     	if( faqsShowing == 0 ) {
     		slideOut(newID);
     		thisID = parseFloat( $(this).attr('id').substr(9, $(this).attr('id').length - 9) );
@@ -32,81 +30,23 @@ jQuery(document).ready(function($) {
     	}
     	else {
     		slideIn(thisID);
-    		setTimeout(function(){slideOut(newID);},500);
+    		setTimeout(function(){slideOut(newID);},slideLength);
     		thisID = parseFloat( $(this).attr('id').substr(9, $(this).attr('id').length - 9) );
     		faqsShowing = 1;
     	}
-    	
-    	// scroll
-    	$(window).on('scroll',scrollEffect);
-    	
+    	$(window).on('scroll',scrollEffect);    	
     }
-    	
+    
+    function clickHide() {
+    	var thisID = parseFloat( $(this).parent().attr('id').substr(7, $(this).parent().attr('id').length - 7) );
+		slideIn(thisID);
+    }
     
     function scrollEffect() {
-    	
-    	//setTimeout(function(){	    	
-	    	$('.rt-faq').animate({
-	    		left: '100%',
-	    	}, 500);	    	
-	    	
-	   // },250);
-	    
-	    $(window).off('scroll');
-	    
+		$('.rt-faq').animate({
+	    	left: '100%',
+		}, slideLength);	    
+	    $(window).off('scroll');	    
     }
-  
-  
-/*   
-    $('.faq-preview').click(function(){
-    	var thisID = parseFloat( $(this).attr('id').substr(9, $(this).attr('id').length - 9) );
-    	$('.rt-faq').animate({
-    		left: '100%',
-    	}, 500);
-    	$('#rt-faq-' + thisID).animate({
-    		left: '50%',
-    	}, 500);
-    });
-    
-    $(window).scroll(function(){
-    	$('.rt-faq').animate({
-    		left: '100%',
-    	}, 500);
-    });
-*/
-    
-    /*
-    var questionCount = 1;
-	$('.faq-question').each(function(){
-		$(this).attr('id','rt-faq-' + questionCount);
-		questionCount++;
-	});
-	
-	$('.faq-question').click(function() {
-		
-		$('.faq-question').css('clear','none');
-		$('.faq-answer').hide();
-		
-		var thisQuestion = parseFloat( $(this).attr('id').substr(7, $(this).attr('id').length - 7 ) );
-		
-		$(this).css('clear','both');
-		$('#rt-faq-' + (thisQuestion + 1) ).css('clear','both');
-		
-		$(this).parent().children('.faq-answer').show();
-		
-		
-		//$(this).parent().children('.faq-answer').fadeIn();
-		/*
-		$(this).animate({
-			opacity: 0.25
-		}, 500);
-		*/
-		//$('.faq-question').css('clear','none');
-		//$(this).css('clear','both');
-	//});
-	//function() {
-		//$(this).css('clear','none');
-		//$(this).parent().children('.faq-answer').fadeOut();
-	//});
-	
+ 
 });
