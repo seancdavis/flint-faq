@@ -1,26 +1,60 @@
 jQuery(document).ready(function($) {
   
   
+  function slideOut(ID) {
+	$('#rt-faq-' + ID).animate({
+		left: '50%',
+	}, 500);
+  }
   
+	function slideIn(ID) {
+		$('#rt-faq-' + ID).animate({
+			left: '100%',
+		}, 500);
+  	}
   
-  $('.faq-preview').click(function(){
-    	var thisID = parseFloat( $(this).attr('id').substr(9, $(this).attr('id').length - 9) );
-    	$('.rt-faq').animate({
-    		left: '100%',
-    	}, 500);
-    	$('#rt-faq-' + thisID).animate({
-    		left: '50%',
-    	}, 500);
-    }); 
+  var thisID = '';
+  var faqsShowing = 0;
+  
+  $('.faq-preview').on('click',clickEffect);
+  	
+  	function clickEffect() {
+    	var newID = parseFloat( $(this).attr('id').substr(9, $(this).attr('id').length - 9) );
+    	
+    	if( faqsShowing == 0 ) {
+    		slideOut(newID);
+    		thisID = parseFloat( $(this).attr('id').substr(9, $(this).attr('id').length - 9) );
+    		faqsShowing = 1;
+    	}
+    	else if( newID == thisID ) {
+    		slideIn(newID);
+    		faqsShowing = 0;
+    	}
+    	else {
+    		slideIn(thisID);
+    		setTimeout(function(){slideOut(newID);},500);
+    		thisID = parseFloat( $(this).attr('id').substr(9, $(this).attr('id').length - 9) );
+    		faqsShowing = 1;
+    	}
+    	
+    	// scroll
+    	$(window).on('scroll',scrollEffect);
+    	
+    }
+    	
     
-    $(window).scroll(function(){
-    	setTimeout(function(){
+    function scrollEffect() {
+    	
+    	//setTimeout(function(){	    	
 	    	$('.rt-faq').animate({
 	    		left: '100%',
-	    	}, 500);
+	    	}, 500);	    	
 	    	
-	    	},250);
-    });
+	   // },250);
+	    
+	    $(window).off('scroll');
+	    
+    }
   
   
 /*   
